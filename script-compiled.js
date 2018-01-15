@@ -20,12 +20,16 @@ var Stopwatch = function (_React$Component) {
       running: false,
       miliseconds: 0,
       seconds: 0,
-      minutes: 0
+      minutes: 0,
+      results: []
     };
     _this.start = _this.start.bind(_this);
     _this.stop = _this.stop.bind(_this);
     _this.calculate = _this.calculate.bind(_this);
     _this.format = _this.format.bind(_this);
+    _this.reset = _this.reset.bind(_this);
+    _this.addResult = _this.addResult.bind(_this);
+    _this.removeResults = _this.removeResults(_this);
     return _this;
   }
 
@@ -77,6 +81,27 @@ var Stopwatch = function (_React$Component) {
       return time;
     }
   }, {
+    key: 'reset',
+    value: function reset() {
+      this.setState({
+        miliseconds: 0,
+        seconds: 0,
+        minutes: 0
+      });
+    }
+  }, {
+    key: 'addResult',
+    value: function addResult() {
+      this.state.results.push(this.format());
+    }
+  }, {
+    key: 'removeResults',
+    value: function removeResults() {
+      this.setState({
+        results: []
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var btnName = ['start', 'stop', 'reset', 'add result', 'remove results'];
@@ -98,13 +123,24 @@ var Stopwatch = function (_React$Component) {
             { className: 'watch' },
             this.format()
           ),
-          React.createElement(Button, { value: btnName[3], eventList: this.click })
+          React.createElement(Button, { value: btnName[3], eventList: this.addResult })
         ),
         React.createElement(
           'div',
           null,
-          React.createElement(Button, { value: btnName[2], eventList: this.click2 }),
-          React.createElement(Button, { value: btnName[4], eventList: this.click })
+          React.createElement(Button, { value: btnName[2], eventList: this.reset }),
+          React.createElement(Button, { value: btnName[4], eventList: this.removeResults })
+        ),
+        React.createElement(
+          'ol',
+          null,
+          this.state.results.map(function (result) {
+            return React.createElement(
+              'li',
+              { key: result },
+              result
+            );
+          })
         )
       );
     }

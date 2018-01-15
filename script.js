@@ -5,13 +5,17 @@ class Stopwatch extends React.Component {
     running: false,
     miliseconds: 0,
     seconds: 0,
-    minutes: 0
+    minutes: 0,
+    results: []
   }
   this.start = this.start.bind(this);
   this.stop = this.stop.bind(this);
   this.calculate = this.calculate.bind(this);
   this.format = this.format.bind(this);
- }
+  this.reset = this.reset.bind(this);
+  this.addResult = this.addResult.bind(this);
+  this.removeResults = this.removeResults(this);
+}
 
 start() {
   if (!this.state.running) {
@@ -55,6 +59,25 @@ format() {
   return time;
  }
 
+reset() {
+  this.setState({
+    miliseconds: 0,
+    seconds: 0,
+    minutes: 0
+  })
+}
+
+addResult() {
+  this.state.results.push(this.format());
+}
+
+removeResults() {
+  this.setState({
+    results: []
+  });
+    
+}
+
 render() {
   const btnName = ['start', 'stop', 'reset', 'add result', 'remove results'];
   
@@ -66,12 +89,15 @@ render() {
       </div>
       <div>
         <div className='watch'>{this.format()}</div>
-        <Button value={btnName[3]} eventList={this.click} />
+        <Button value={btnName[3]} eventList={this.addResult} />
       </div>
       <div>
-        <Button value={btnName[2]} eventList={this.click2} />
-        <Button value={btnName[4]} eventList={this.click} />
+        <Button value={btnName[2]} eventList={this.reset} />
+        <Button value={btnName[4]} eventList={this.removeResults} />
       </div>
+      <ol>
+        {this.state.results.map(result => <li key={result}>{result}</li>)}
+      </ol>
     </div>
     );
   }
