@@ -66,8 +66,15 @@ var Stopwatch = function (_React$Component) {
     }
   }, {
     key: 'format',
-    value: function format(time) {
-      return '' + pad0(this.state.minutes);
+    value: function format() {
+      var time = '';
+      this.state.minutes.toString().length < 2 ? time += '0' + this.state.minutes + ':' : time += '' + this.state.minutes;
+
+      this.state.seconds.toString().length < 2 ? time += '0' + this.state.seconds + ':' : time += this.state.seconds + ':';
+
+      this.state.miliseconds.toString().length < 2 ? time += '0' + this.state.miliseconds : time += this.state.miliseconds;
+
+      return time;
     }
   }, {
     key: 'render',
@@ -89,7 +96,7 @@ var Stopwatch = function (_React$Component) {
           React.createElement(
             'div',
             { className: 'watch' },
-            [this.state.minutes, this.state.seconds, this.state.miliseconds]
+            this.format()
           ),
           React.createElement(Button, { value: btnName[3], eventList: this.click })
         ),
@@ -128,14 +135,6 @@ var Button = function (_React$Component2) {
 
   return Button;
 }(React.Component);
-
-function pad0(value) {
-  var result = value.toString();
-  if (result.length < 2) {
-    result = '0' + result;
-  }
-  return result;
-}
 
 var App = document.getElementById('root');
 ReactDOM.render(React.createElement(Stopwatch, null), App);

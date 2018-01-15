@@ -18,7 +18,7 @@ start() {
     this.setState({running: true});
     this.watch = setInterval(() => {
       this.setState({miliseconds: this.state.miliseconds +1 })
-      this.calculate();
+      this.calculate(); 
     }, 10);
   
   }
@@ -44,9 +44,16 @@ calculate() {
   }
 }
 
-format(time) {
-  return `${pad0(this.state.minutes)}`
-}
+format() {
+  let time ='';
+  (this.state.minutes.toString().length < 2)? time += `0${this.state.minutes}:` : time +=`${this.state.minutes}`;
+ 
+  (this.state.seconds.toString().length < 2)? time += `0${this.state.seconds}:`: time += `${this.state.seconds}:`;
+  
+  (this.state.miliseconds.toString().length < 2)? time += `0${this.state.miliseconds}` : time += this.state.miliseconds;
+  
+  return time;
+ }
 
 render() {
   const btnName = ['start', 'stop', 'reset', 'add result', 'remove results'];
@@ -58,7 +65,7 @@ render() {
         <Button value={btnName[1]} eventList={this.stop} />
       </div>
       <div>
-        <div className='watch'>{[this.state.minutes, this.state.seconds, this.state.miliseconds]}</div>
+        <div className='watch'>{this.format()}</div>
         <Button value={btnName[3]} eventList={this.click} />
       </div>
       <div>
@@ -77,17 +84,6 @@ class Button extends React.Component {
     );
   }
 }
-
-function pad0(value) {
-  let result = value.toString();
-  if (result.length < 2) {
-      result = '0' + result;
-  }
-  return result;
-}
-
-
-
 
 const App = document.getElementById('root');
 ReactDOM.render(<Stopwatch />, App);
