@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin-ext');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.btn {
+  width: 200px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid #000;
+  background: #bbb;
+  margin: 10px;
+  font-size: 20px;
+  transition: .2s ease-in;
+}
+
+.btn:hover {
+  background: black;
+  color: #bbb;
+}
+
+.container .stopwatch {
+  display: flex;
+  align-items: center;
+}
+
+.container .watch {
+  width: 200px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 30px;
+  margin-left: 120px;
+}
+
+.container .list {
+  margin-top: 40px;
+  margin-left: 100px;
+}
+
+.container .list li {
+  font-size: 20px;
+  padding-left: 4px;
+  margin-top: 8px;
+}
