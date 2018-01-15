@@ -29,7 +29,7 @@ var Stopwatch = function (_React$Component) {
     _this.format = _this.format.bind(_this);
     _this.reset = _this.reset.bind(_this);
     _this.addResult = _this.addResult.bind(_this);
-    _this.removeResults = _this.removeResults(_this);
+    _this.removeResults = _this.removeResults.bind(_this);
     return _this;
   }
 
@@ -92,6 +92,7 @@ var Stopwatch = function (_React$Component) {
     value: function addResult() {
       this.state.results.push(this.format());
       console.log(this.state.results);
+      this.render();
     }
   }, {
     key: 'removeResults',
@@ -99,7 +100,6 @@ var Stopwatch = function (_React$Component) {
       this.setState({
         results: []
       });
-      console.log('hey');
     }
   }, {
     key: 'render',

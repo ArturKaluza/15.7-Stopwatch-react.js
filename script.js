@@ -14,7 +14,7 @@ class Stopwatch extends React.Component {
   this.format = this.format.bind(this);
   this.reset = this.reset.bind(this);
   this.addResult = this.addResult.bind(this);
-  this.removeResults = this.removeResults(this);
+  this.removeResults = this.removeResults.bind(this);
 }
 
 start() {
@@ -62,19 +62,19 @@ reset() {
     miliseconds: 0,
     seconds: 0,
     minutes: 0
-  })
+  });
 }
 
 addResult() {
   this.state.results.push(this.format());
   console.log(this.state.results);
+  this.render();
 }
 
 removeResults() {
   this.setState({
     results: []
   });
-  console.log('hey');
 }
 
 render() {
